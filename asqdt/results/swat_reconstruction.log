@@ -1,0 +1,10 @@
+reading dataset/merged.csv ...
+sorted 1441719 rows -> 946719 after de-duplicating timestamps
+first attack at 2015-12-28 10:29:14; splitting at 2015-12-28 08:29:14
+normal trace: 491354 rows (2015-12-22 16:00:00 .. 2015-12-28 08:29:13)
+attack trace: 455365 rows, 54621 attack samples, 35 contiguous attack scenarios (2015-12-28 08:29:14 .. 2016-01-02 14:59:59)
+  note: 1 recording gap(s) > 60 s inside the attack trace (expected between collection days)
+wrote dataset/normal_rebuilt.csv and dataset/attack_rebuilt.csv
+sha256(dataset/normal_rebuilt.csv) = 24d821f4d35be109fae0239bf3f69427cdb19c7244d354aac6a4837cd35c89cf
+sha256(dataset/attack_rebuilt.csv) = 45b0f8d102eac57458050aa845b722f2f2ae449708627b5aea2963aba7cb70d4
+wrote reconstruction manifest asqdt/results/swat_reconstruction_manifest.json

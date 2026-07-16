@@ -1,0 +1,133 @@
+[sanity] batched statevectors == QuantumCircuit.statevector  OK
+
+[MAIN PASS] design + bridge diagnostic + tuned baselines
+  CNC  seed=   42  gamma=0.0050  (2.3s)
+  CNC  seed=  123  gamma=0.0196  (2.4s)
+  CNC  seed=  256  gamma=0.0478  (2.5s)
+  CNC  seed=  789  gamma=0.0481  (2.4s)
+  CNC  seed= 1024  gamma=0.0098  (2.3s)
+  CSTR seed=   42  gamma=0.0022  (3.3s)
+  CSTR seed=  123  gamma=0.0022  (3.2s)
+  CSTR seed=  256  gamma=0.0022  (3.3s)
+  CSTR seed=  789  gamma=0.0022  (3.2s)
+  CSTR seed= 1024  gamma=0.1086  (3.2s)
+  Tank seed=   42  gamma=0.0305  (2.9s)
+  Tank seed=  123  gamma=0.0623  (2.9s)
+  Tank seed=  256  gamma=0.0629  (2.9s)
+  Tank seed=  789  gamma=0.1565  (2.9s)
+  Tank seed= 1024  gamma=0.1579  (2.9s)
+
+==============================================================================
+ EXP A: MARGIN--DETECTION LINK DIAGNOSTIC (Table V)
+==============================================================================
+Bench Attack     |              MMD  Q/RBF |              AUC  Q/RBF |              Dmin Q/RBF |               F1  Q/RBF
+CNC   FDI        | -0.014/+0.073        | 0.98/1.00             | +0.21/+0.94       | 0.92/0.94
+CNC   Sinusoidal | -0.016/+0.032        | 0.99/0.50             | +0.31/-3.30       | 0.93/0.39
+CNC   Ramp       | +0.005/+0.034        | 0.99/0.49             | +0.31/-2.81       | 0.94/0.41
+CNC   Composite  | -0.004/+0.033        | 1.00/0.94             | +0.49/-0.83       | 0.94/0.84
+CSTR  FDI        | +0.009/+0.208        | 0.99/0.64             | +0.29/-2.22       | 0.94/0.69
+CSTR  Thermal    | +0.017/-0.001        | 0.99/0.27             | +0.39/-3.02       | 0.93/0.19
+CSTR  Conc.      | +0.019/+0.120        | 1.00/0.57             | +0.60/-2.40       | 0.95/0.61
+Tank  Bias       | +0.001/+0.014        | 1.00/0.72             | +0.54/-1.15       | 0.95/0.56
+Tank  Oscill.    | +0.004/+0.017        | 0.99/0.69             | +0.33/-1.19       | 0.93/0.56
+Tank  Drift      | +0.006/+0.024        | 0.99/0.70             | +0.36/-1.13       | 0.93/0.56
+  Spearman rho_S(MMD , F1) = -0.345  (p=4.36e-04, n=100 family-seed-kernel points)
+  Spearman rho_S(AUC , F1) = +0.942  (p=2.33e-48, n=100 family-seed-kernel points)
+  Spearman rho_S(DMIN, F1) = +0.901  (p=2.73e-37, n=100 family-seed-kernel points)
+
+  LaTeX rows (Table V; AUC & Dmin columns, Q-Dir / RBF):
+  CNC & FDI & -0.014 & +0.073 & 0.98 & 1.00 & +0.21 & +0.94 & 0.92 & 0.94 \\
+  CNC & Sinusoidal & -0.016 & +0.032 & 0.99 & 0.50 & +0.31 & -3.30 & 0.93 & 0.39 \\
+  CNC & Ramp & +0.005 & +0.034 & 0.99 & 0.49 & +0.31 & -2.81 & 0.94 & 0.41 \\
+  CNC & Composite & -0.004 & +0.033 & 1.00 & 0.94 & +0.49 & -0.83 & 0.94 & 0.84 \\
+  CSTR & FDI & +0.009 & +0.208 & 0.99 & 0.64 & +0.29 & -2.22 & 0.94 & 0.69 \\
+  CSTR & Thermal & +0.017 & -0.001 & 0.99 & 0.27 & +0.39 & -3.02 & 0.93 & 0.19 \\
+  CSTR & Conc. & +0.019 & +0.120 & 1.00 & 0.57 & +0.60 & -2.40 & 0.95 & 0.61 \\
+  Tank & Bias & +0.001 & +0.014 & 1.00 & 0.72 & +0.54 & -1.15 & 0.95 & 0.56 \\
+  Tank & Oscill. & +0.004 & +0.017 & 0.99 & 0.69 & +0.33 & -1.19 & 0.93 & 0.56 \\
+  Tank & Drift & +0.006 & +0.024 & 0.99 & 0.70 & +0.36 & -1.13 & 0.93 & 0.56 \\
+  Spearman row: MMD -0.35 | AUC +0.94 | Dmin +0.90
+
+==============================================================================
+ EXP B: TUNED BASELINES + AUTOENCODER (Table VIII new columns)
+==============================================================================
+Bench Attack     |      OCSVM^t    IForest^t           AE |   Q-Dir F1 (ref)
+CNC   FDI        | 0.95$\pm$0.00 0.74$\pm$0.11 0.95$\pm$0.00 | 0.92$\pm$0.04
+    LaTeX: 0.95$\pm$0.00 & 0.74$\pm$0.11 & 0.95$\pm$0.00
+CNC   Sinusoidal | 0.95$\pm$0.00 0.03$\pm$0.07 0.95$\pm$0.00 | 0.93$\pm$0.03
+    LaTeX: 0.95$\pm$0.00 & 0.03$\pm$0.07 & 0.95$\pm$0.00
+CNC   Ramp       | 0.95$\pm$0.00 0.09$\pm$0.12 0.95$\pm$0.00 | 0.94$\pm$0.02
+    LaTeX: 0.95$\pm$0.00 & 0.09$\pm$0.12 & 0.95$\pm$0.00
+CNC   Composite  | 0.95$\pm$0.00 0.60$\pm$0.12 0.95$\pm$0.00 | 0.94$\pm$0.02
+    LaTeX: 0.95$\pm$0.00 & 0.60$\pm$0.12 & 0.95$\pm$0.00
+CSTR  FDI        | 0.95$\pm$0.00 0.60$\pm$0.11 0.95$\pm$0.00 | 0.94$\pm$0.02
+    LaTeX: 0.95$\pm$0.00 & 0.60$\pm$0.11 & 0.95$\pm$0.00
+CSTR  Thermal    | 0.95$\pm$0.00 0.07$\pm$0.08 0.95$\pm$0.00 | 0.93$\pm$0.04
+    LaTeX: 0.95$\pm$0.00 & 0.07$\pm$0.08 & 0.95$\pm$0.00
+CSTR  Conc.      | 0.95$\pm$0.00 0.53$\pm$0.10 0.95$\pm$0.00 | 0.95$\pm$0.00
+    LaTeX: 0.95$\pm$0.00 & 0.53$\pm$0.10 & 0.95$\pm$0.00
+Tank  Bias       | 0.95$\pm$0.00 0.43$\pm$0.17 0.95$\pm$0.00 | 0.95$\pm$0.00
+    LaTeX: 0.95$\pm$0.00 & 0.43$\pm$0.17 & 0.95$\pm$0.00
+Tank  Oscill.    | 0.95$\pm$0.00 0.26$\pm$0.18 0.95$\pm$0.00 | 0.93$\pm$0.03
+    LaTeX: 0.95$\pm$0.00 & 0.26$\pm$0.18 & 0.95$\pm$0.00
+Tank  Drift      | 0.95$\pm$0.00 0.29$\pm$0.19 0.95$\pm$0.00 | 0.93$\pm$0.03
+    LaTeX: 0.95$\pm$0.00 & 0.29$\pm$0.19 & 0.95$\pm$0.00
+
+==============================================================================
+ EXP E: SURROGATE-IMPROVEMENT ABLATION (Table VII, CNC)
+==============================================================================
+  seed 42: V0:F1=0.40/eps=0.90  V1:F1=0.47/eps=0.48  V2:F1=0.21/eps=0.70  V3:F1=0.60/eps=0.22  V4:F1=0.20/eps=0.70
+  seed 123: V0:F1=0.00/eps=0.90  V1:F1=0.42/eps=0.65  V2:F1=0.12/eps=0.76  V3:F1=0.93/eps=0.33  V4:F1=0.23/eps=0.57
+  seed 256: V0:F1=0.15/eps=0.86  V1:F1=0.36/eps=0.87  V2:F1=0.27/eps=0.74  V3:F1=0.54/eps=0.65  V4:F1=0.16/eps=0.86
+  seed 789: V0:F1=0.00/eps=0.84  V1:F1=0.39/eps=0.74  V2:F1=0.08/eps=0.81  V3:F1=0.79/eps=0.75  V4:F1=0.12/eps=0.85
+  seed 1024: V0:F1=0.04/eps=0.93  V1:F1=0.23/eps=0.61  V2:F1=0.29/eps=0.72  V3:F1=0.71/eps=0.52  V4:F1=0.00/eps=0.93
+
+  variant                          eps_surr          MAE          CKA      F1(avg)
+  MLP, $D_e{=}15$ (current)    0.89$\pm$0.03 0.07$\pm$0.01 0.61$\pm$0.09 0.12$\pm$0.15
+    LaTeX: MLP, $D_e{=}15$ (current) & 0.89$\pm$0.03 & 0.61$\pm$0.09 & 0.12$\pm$0.15 \\
+  Normalized MLP               0.67$\pm$0.13 0.18$\pm$0.06 0.81$\pm$0.09 0.37$\pm$0.08
+    LaTeX: Normalized MLP & 0.67$\pm$0.13 & 0.81$\pm$0.09 & 0.37$\pm$0.08 \\
+  MLP, $D_e{=}64$              0.75$\pm$0.04 0.08$\pm$0.02 0.78$\pm$0.05 0.19$\pm$0.08
+    LaTeX: MLP, $D_e{=}64$ & 0.75$\pm$0.04 & 0.78$\pm$0.05 & 0.19$\pm$0.08 \\
+  Alignment-refined (CKA)      0.50$\pm$0.19 0.08$\pm$0.01 0.92$\pm$0.02 0.72$\pm$0.14
+    LaTeX: Alignment-refined (CKA) & 0.50$\pm$0.19 & 0.92$\pm$0.02 & 0.72$\pm$0.14 \\
+  Expanded training pool       0.78$\pm$0.13 0.30$\pm$0.15 0.76$\pm$0.06 0.14$\pm$0.08
+    LaTeX: Expanded training pool & 0.78$\pm$0.13 & 0.76$\pm$0.06 & 0.14$\pm$0.08 \\
+
+==============================================================================
+ EXP C: MULTI-SEED BUDGETED SENSOR CO-DESIGN (Table IX)
+==============================================================================
+  CNC seed=42: greedy=[1, 2, 3, 5] F1=0.94 | topvar=[1, 2, 3, 4] F1=0.95 | rand F1=0.94 (10 draws) | all F1=0.94
+  CNC seed=123: greedy=[1, 2, 3, 5] F1=0.95 | topvar=[0, 1, 2, 3] F1=0.95 | rand F1=0.94 (10 draws) | all F1=0.92
+  CNC seed=256: greedy=[0, 1, 3, 4] F1=0.91 | topvar=[1, 2, 4, 5] F1=0.94 | rand F1=0.95 (10 draws) | all F1=0.94
+  CNC seed=789: greedy=[0, 1, 2, 3] F1=0.94 | topvar=[0, 1, 2, 5] F1=0.95 | rand F1=0.94 (10 draws) | all F1=0.95
+  CNC seed=1024: greedy=[1, 2, 3, 4] F1=0.95 | topvar=[0, 1, 2, 5] F1=0.95 | rand F1=0.94 (10 draws) | all F1=0.91
+  LaTeX (CNC 4/6):
+    Greedy AS-QDT & 0.0076$\pm$0.0037 & 0.94$\pm$0.01 \\
+    Random & 0.0001$\pm$0.0019 & 0.94$\pm$0.00 \\
+    Top-variance & 0.0035$\pm$0.0080 & 0.95$\pm$0.01 \\
+    All sensors & -0.0071$\pm$0.0047 & 0.93$\pm$0.01 \\
+  CSTR seed=42: greedy=[0, 2] F1=0.95 | topvar=[0, 2] F1=0.95 | rand F1=0.93 (3 draws) | all F1=0.95
+  CSTR seed=123: greedy=[0, 2] F1=0.95 | topvar=[1, 2] F1=0.95 | rand F1=0.95 (3 draws) | all F1=0.90
+  CSTR seed=256: greedy=[0, 1] F1=0.88 | topvar=[0, 2] F1=0.92 | rand F1=0.92 (3 draws) | all F1=0.95
+  CSTR seed=789: greedy=[0, 1] F1=0.95 | topvar=[0, 2] F1=0.95 | rand F1=0.95 (3 draws) | all F1=0.95
+  CSTR seed=1024: greedy=[1, 2] F1=0.90 | topvar=[1, 2] F1=0.90 | rand F1=0.93 (3 draws) | all F1=0.95
+  LaTeX (CSTR 2/3):
+    Greedy AS-QDT & 0.0032$\pm$0.0066 & 0.93$\pm$0.03 \\
+    Random & 0.0039$\pm$0.0054 & 0.94$\pm$0.01 \\
+    Top-variance & 0.0013$\pm$0.0100 & 0.93$\pm$0.02 \\
+    All sensors & 0.0147$\pm$0.0161 & 0.94$\pm$0.02 \\
+
+==============================================================================
+ EXP D: ADAPTIVE-ATTACK STRESS TEST (Table X)
+==============================================================================
+  CNC seed=42 [init=fdi/ep3] lib: mmd=+0.0008 F1q=0.95 in=10/10 | ada: mmd=-0.0420 F1q=0.90 F1r=0.95 in=10/10
+  CNC seed=123 [init=fdi/ep0] lib: mmd=-0.0060 F1q=0.95 in=10/10 | ada: mmd=-0.0501 F1q=0.90 F1r=0.43 in=10/10
+  CNC seed=256 [init=fdi/ep6] lib: mmd=+0.0292 F1q=0.95 in=10/10 | ada: mmd=-0.0352 F1q=0.84 F1r=0.95 in=10/10
+  CNC seed=789 [init=fdi/ep7] lib: mmd=-0.0110 F1q=0.95 in=10/10 | ada: mmd=-0.0316 F1q=0.90 F1r=0.95 in=10/10
+  CNC seed=1024 [init=fdi/ep9] lib: mmd=-0.0143 F1q=0.95 in=10/10 | ada: mmd=-0.0534 F1q=0.84 F1r=0.62 in=10/10
+  LaTeX: CNC & Library & 96.56 & 64.9 & -0.0002 & 0.95$\pm$0.00 & 0.80$\pm$0.21 \\   (in-set 10.0/10)
+  LaTeX: CNC & Adaptive & 82.51 & 63.6 & -0.0425 & 0.88$\pm$0.03 & 0.78$\pm$0.22 \\   (in-set 10.0/10)
+  CSTR seed=42 [init=cstr_fdi/ep6] lib: mmd=-0.0012 F1q=0.95 in=10/10 | ada: mmd=-0.0285 F1q=0.95 F1r=0.95 in=10/10
+  CSTR seed=123 [init=cstr_thermal/ep4] lib: mmd=-0.0161 F1q=0.84 in=0/10 | ada: mmd=-0.0161 F1q=0.84 F1r=0.00 in=0/10
+  CSTR seed=256 [init=cstr_fdi/ep7] lib: mmd=+0.0269 F1q=0.95 in=10/10 | ada: mmd=-0.0340 F1q=0.90 F1r=0.95 in=10/10

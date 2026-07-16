@@ -1,0 +1,135 @@
+diff -ru a/asqdt/codesign/solver.py b/asqdt/codesign/solver.py
+--- a/asqdt/codesign/solver.py	2026-07-09 16:08:58.547147256 +0000
++++ b/asqdt/codesign/solver.py	2026-07-09 16:08:58.567506807 +0000
+@@ -57,8 +57,13 @@
+         mean = windows.mean(axis=0)
+         centered = windows - mean
+         _, _, Vt = np.linalg.svd(centered, full_matrices=False)
++        Vt = Vt[:target_dim]
++        # Deterministic sign convention (see evaluation.fastq.pca_fit)
++        signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++        signs[signs == 0] = 1.0
++        Vt = Vt * signs[:, None]
+         self._pca_mean = mean
+-        self._pca_V = Vt[:target_dim].T
++        self._pca_V = Vt.T
+         return centered @ self._pca_V
+ 
+     def _apply_pca(self, windows):
+diff -ru a/asqdt/evaluation/fastq.py b/asqdt/evaluation/fastq.py
+--- a/asqdt/evaluation/fastq.py	2026-07-09 16:08:58.555899429 +0000
++++ b/asqdt/evaluation/fastq.py	2026-07-09 16:08:58.568741104 +0000
+@@ -140,7 +140,16 @@
+     X = np.nan_to_num(X)
+     mu = X.mean(0)
+     _, _, Vt = np.linalg.svd(X - mu, full_matrices=False)
+-    return mu, Vt[:min(dim, Vt.shape[0])].T
++    Vt = Vt[:min(dim, Vt.shape[0])]
++    # --- Deterministic sign convention (svd_flip-style) -------------------
++    # Make the largest-|.| entry of each principal component positive.
++    # LAPACK/BLAS builds return singular vectors with arbitrary signs;
++    # distance-based classical kernels (RBF/Laplacian) are invariant to
++    # component sign flips, but the RY/RZ quantum encoding is not, so the
++    # quantum-kernel design was backend-dependent without this convention.
++    signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++    signs[signs == 0] = 1.0
++    return mu, (Vt * signs[:, None]).T
+ 
+ 
+ def design_quantum_kernel(qc, Xn_p, Xa_pool, seed, n_iters=cfg.MAX_ITERS, lr=cfg.KERNEL_LR):
+diff -ru a/asqdt/scripts/run_new_experiments.py b/asqdt/scripts/run_new_experiments.py
+--- a/asqdt/scripts/run_new_experiments.py	2026-07-09 16:08:58.555058966 +0000
++++ b/asqdt/scripts/run_new_experiments.py	2026-07-09 16:08:58.568194806 +0000
+@@ -21,7 +21,16 @@
+ def pca_fit(X, dim):
+     X = np.nan_to_num(X); mu = X.mean(0); C = X - mu
+     _, _, Vt = np.linalg.svd(C, full_matrices=False)
+-    return mu, Vt[:min(dim, Vt.shape[0])].T
++    Vt = Vt[:min(dim, Vt.shape[0])]
++    # --- Deterministic sign convention (svd_flip-style) -------------------
++    # Make the largest-|.| entry of each principal component positive.
++    # LAPACK/BLAS builds return singular vectors with arbitrary signs;
++    # distance-based classical kernels (RBF/Laplacian) are invariant to
++    # component sign flips, but the RY/RZ quantum encoding is not, so the
++    # quantum-kernel design was backend-dependent without this convention.
++    signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++    signs[signs == 0] = 1.0
++    return mu, (Vt * signs[:, None]).T
+ 
+ def pw_scores(K_ref, kmaker, X_ref, X_test):
+     mr = (np.sum(K_ref) - np.trace(K_ref)) / (len(K_ref) * (len(K_ref) - 1))
+diff -ru a/asqdt/scripts/run_tifs_final.py b/asqdt/scripts/run_tifs_final.py
+--- a/asqdt/scripts/run_tifs_final.py	2026-07-09 16:08:58.547542425 +0000
++++ b/asqdt/scripts/run_tifs_final.py	2026-07-09 16:08:58.567810899 +0000
+@@ -36,7 +36,16 @@
+ def pca_fit(X, dim):
+     X = np.nan_to_num(X); mu = X.mean(0); C = X - mu
+     _, _, Vt = np.linalg.svd(C, full_matrices=False)
+-    return mu, Vt[:min(dim, Vt.shape[0])].T
++    Vt = Vt[:min(dim, Vt.shape[0])]
++    # --- Deterministic sign convention (svd_flip-style) -------------------
++    # Make the largest-|.| entry of each principal component positive.
++    # LAPACK/BLAS builds return singular vectors with arbitrary signs;
++    # distance-based classical kernels (RBF/Laplacian) are invariant to
++    # component sign flips, but the RY/RZ quantum encoding is not, so the
++    # quantum-kernel design was backend-dependent without this convention.
++    signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++    signs[signs == 0] = 1.0
++    return mu, (Vt * signs[:, None]).T
+ 
+ 
+ def perm_thresh(K, rng, n_perm=cfg.N_PERM_THRESH):
+diff -ru a/asqdt/scripts/run_tifs_v2.py b/asqdt/scripts/run_tifs_v2.py
+--- a/asqdt/scripts/run_tifs_v2.py	2026-07-09 16:08:58.555230498 +0000
++++ b/asqdt/scripts/run_tifs_v2.py	2026-07-09 16:08:58.568225287 +0000
+@@ -41,7 +41,16 @@
+ def pca_fit(X, dim):
+     X = np.nan_to_num(X); mu = X.mean(0); C = X - mu
+     _, _, Vt = np.linalg.svd(C, full_matrices=False)
+-    return mu, Vt[:min(dim, Vt.shape[0])].T
++    Vt = Vt[:min(dim, Vt.shape[0])]
++    # --- Deterministic sign convention (svd_flip-style) -------------------
++    # Make the largest-|.| entry of each principal component positive.
++    # LAPACK/BLAS builds return singular vectors with arbitrary signs;
++    # distance-based classical kernels (RBF/Laplacian) are invariant to
++    # component sign flips, but the RY/RZ quantum encoding is not, so the
++    # quantum-kernel design was backend-dependent without this convention.
++    signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++    signs[signs == 0] = 1.0
++    return mu, (Vt * signs[:, None]).T
+ 
+ 
+ def perm_thresh(K, rng, n_perm=cfg.N_PERM_THRESH):
+diff -ru a/asqdt/scripts/surrogate_detect.py b/asqdt/scripts/surrogate_detect.py
+--- a/asqdt/scripts/surrogate_detect.py	2026-07-09 16:08:58.547703825 +0000
++++ b/asqdt/scripts/surrogate_detect.py	2026-07-09 16:08:58.567929334 +0000
+@@ -34,7 +34,16 @@
+ def pca_fit(X, dim):
+     X = np.nan_to_num(X); mu = X.mean(0); C = X - mu
+     _, _, Vt = np.linalg.svd(C, full_matrices=False)
+-    return mu, Vt[:min(dim, Vt.shape[0])].T
++    Vt = Vt[:min(dim, Vt.shape[0])]
++    # --- Deterministic sign convention (svd_flip-style) -------------------
++    # Make the largest-|.| entry of each principal component positive.
++    # LAPACK/BLAS builds return singular vectors with arbitrary signs;
++    # distance-based classical kernels (RBF/Laplacian) are invariant to
++    # component sign flips, but the RY/RZ quantum encoding is not, so the
++    # quantum-kernel design was backend-dependent without this convention.
++    signs = np.sign(Vt[np.arange(Vt.shape[0]), np.argmax(np.abs(Vt), axis=1)])
++    signs[signs == 0] = 1.0
++    return mu, (Vt * signs[:, None]).T
+ 
+ 
+ def per_window_scores(K_ref, kmaker, X_ref, X_test):
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,4 +1,5 @@
+-numpy>=2.4
+-scipy>=1.17
+-scikit-learn>=1.8
+-matplotlib>=3.10
++# Pinned environment for exact reproduction of all table values
++numpy==2.4.4
++scipy==1.17.1
++scikit-learn==1.8.0
++matplotlib==3.10.0

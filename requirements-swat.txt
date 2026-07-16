@@ -1,0 +1,7 @@
+# AS-QDT — optional: SWaT reconstruction + validation only
+# Used solely by asqdt/scripts/rebuild_swat_traces.py and asqdt/external/icsdata.py.
+# Not required to reproduce the core paper tables/figures.
+#
+# Fill the exact version from your environment:
+#   pip show pandas | grep Version
+pandas==<FILL IN>

@@ -1,0 +1,225 @@
+{
+  "CNC_fdi": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.74$\\pm$0.11",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CNC_command": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.03$\\pm$0.07",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CNC_ramp": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.09$\\pm$0.12",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CNC_composite": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.60$\\pm$0.12",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CSTR_cstr_fdi": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.60$\\pm$0.11",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CSTR_cstr_thermal": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.07$\\pm$0.08",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "CSTR_cstr_concentration": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.53$\\pm$0.10",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "Tank_tank_bias": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.43$\\pm$0.17",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "Tank_tank_oscillation": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.26$\\pm$0.18",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "Tank_tank_drift": {
+    "ocsvm_t": "0.95$\\pm$0.00",
+    "iforest_t": "0.29$\\pm$0.19",
+    "ae": "0.95$\\pm$0.00"
+  },
+  "selected_params": {
+    "CNC": {
+      "42": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "100",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      },
+      "123": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      },
+      "256": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "789": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "1024": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "100",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      }
+    },
+    "CSTR": {
+      "42": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "123": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      },
+      "256": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "789": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "100",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "1024": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "100",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      }
+    },
+    "Tank": {
+      "42": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 0.1
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "123": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "100",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      },
+      "256": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      },
+      "789": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "1.0",
+          "contamination": "auto"
+        }
+      },
+      "1024": {
+        "ocsvm": {
+          "nu": 0.01,
+          "gamma": 1.0
+        },
+        "iforest": {
+          "n_estimators": "200",
+          "max_samples": "0.5",
+          "contamination": "auto"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# AS-QDT — core dependencies
+# Required to reproduce every table and figure in the paper and supplement.
+# Verified complete against a full import audit of the asqdt package
+# (only numpy, scipy, scikit-learn, and matplotlib are imported by the core pipeline).
+# Target interpreter: Python 3.12 (these pinned versions require Python >= 3.11).
+numpy==2.4.4
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.0

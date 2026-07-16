@@ -1,0 +1,8 @@
+# AS-QDT — optional: IBM Quantum re-execution only (run_ibm_concentration.py)
+# NOT required to reproduce any paper table: Supplementary Table R regenerates
+# from the archived raw counts in ibm_concentration_results.json.
+#
+# Fill the exact versions from your environment:
+#   pip show qiskit qiskit-ibm-runtime | grep -E '^(Name|Version)'
+qiskit==<FILL IN>
+qiskit-ibm-runtime==<FILL IN>

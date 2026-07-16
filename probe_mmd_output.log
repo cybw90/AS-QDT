@@ -1,0 +1,19 @@
+== POOLED design objective (the quantity Algorithm 1 maximizes) ==
+bench    seed       MMD@c=1.0       MMD@c=0.1
+CNC        42          0.0057          0.0254
+CNC       123          0.0101          0.0131
+CNC       256          0.0033         -0.0006
+CNC       789          0.0023          0.0032
+CNC      1024          0.0088          0.0076
+CSTR       42          0.0817          0.0315
+CSTR      123          0.0288          0.1205
+CSTR      256          0.0410          0.0685
+CSTR      789          0.0454          0.0350
+CSTR     1024          0.0576          0.0183
+
+== Per-family statistic and held-out AUC (seed 42) ==
+bench/family               c   batch MMD_u^2   held-out AUC
+CNC/command              1.0         -0.0152           0.24
+CNC/command              0.1          0.0007           0.82
+CSTR/cstr_thermal        1.0          0.0635           0.51
+CSTR/cstr_thermal        0.1         -0.0047           0.31
