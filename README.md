@@ -1,4 +1,4 @@
-# Paper Title: Minimax Attack-Separation Margins for Digital-Twin Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study
+# Paper Title: Minimax Attack-Separation Margins for Digital-Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study
 
 **A Quantum-Kernel Digital Twin for Stealthy Threat Detection**
 
@@ -13,8 +13,8 @@
 **Reproducibility artifact for:**
 
 > **Minimax Attack-Separation Margins for Digital Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study**
-> S. H. Shah, M. Borowczak, K. Kifayat
-> *IEEE Transactions on Systems, Man, and Cybernetics: Systems* (under review)
+
+> *IEEE Transactions on Systems, Man, and Cybernetics: Systems* 
 
 This repository reproduces **every number, table, and figure** reported in the paper and its supplement.
 
