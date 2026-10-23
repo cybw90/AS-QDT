@@ -10,9 +10,7 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
 </p>
 
-**Reproducibility artifact for:**
-
-> **Minimax Attack-Separation Margins for Digital Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study**
+**Reproducibility artifact:**
 
 > *IEEE Transactions on Systems, Man, and Cybernetics: Systems* --- October, 2026.
 
