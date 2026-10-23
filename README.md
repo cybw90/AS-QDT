@@ -4,7 +4,7 @@
 
 <p align="left">
   <img alt="Status" src="https://img.shields.io/badge/status-research%20artifact-blue">
-  <img alt="Venue" src="https://img.shields.io/badge/IEEE%20TSMCS-under%20review-00629B">
+  <img alt="Venue" src="https://img.shields.io/badge/IEEE%20TSMCS-00629B">
   <img alt="Python" src="https://img.shields.io/badge/python-3.12-3776AB">
   <img alt="Quantum" src="https://img.shields.io/badge/quantum-IBM%20Quantum-6929C4">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
