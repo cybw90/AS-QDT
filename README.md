@@ -11,7 +11,8 @@
 </p>
 
 **Reproducibility artifact for:**
-> *Minimax Attack-Separation Margins for Digital Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study* 
+> *Minimax Attack-Separation Margins for Digital Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study*
+> 
 > *IEEE Transactions on Systems, Man, and Cybernetics: Systems* --- October 2026.
 
 This repository reproduces **every number, table, and figure** reported in the paper and its supplement.
