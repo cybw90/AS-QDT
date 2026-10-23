@@ -1,4 +1,4 @@
-# Title: Minimax Attack-Separation Margins for Digital-Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study
+# Minimax Attack-Separation Margins for Digital-Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study
 
 **A Quantum-Kernel Digital Twin for Stealthy Threat Detection**
 
