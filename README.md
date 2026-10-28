@@ -207,7 +207,7 @@ without re-running on hardware. Credentials are never stored in this repository.
 
 ## Citation
 
-If you use MiniMax in your research, please cite:
+If you use Minimax in your research, please cite:
 
 ```bibtex
 @ARTICLE{11754329,
