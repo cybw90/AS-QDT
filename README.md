@@ -205,6 +205,24 @@ without re-running on hardware. Credentials are never stored in this repository.
 
 ---
 
+## Citation
+
+If you use MiniMax in your research, please cite:
+
+```bibtex
+@ARTICLE{11754329,
+  author={Shah, Sajjad H. and Borowczak, Mike and Kifayat, Kashif},
+  journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems}, 
+  title={Minimax Attack-Separation Margins for Digital-Twin-Based Stealthy Threat Detection: A Quantum-Kernel Feasibility Study}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-15},
+  keywords={Kernel;Windows;Design methodology;Seeds (agriculture);Image sensors;Modeling;Detectors;Computer numerical control;Testing;Signal detection;Anomaly detection;cyber–physical manufacturing systems (CPMSs);digital twins (DTs);minimax optimization;quantum kernels;stealthy attacks;systems engineering},
+  doi={10.1109/TSMC.2026.3744550}}
+```
+---
+
 ## 8. License
 
 MIT — see [`LICENSE`](LICENSE).
